@@ -14,13 +14,3 @@ require('bootstrap-datetimepicker/src/js/bootstrap-datetimepicker')
 require('bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')
 require('bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')
 require('./styles/app.css');
-
-$(document).ready(() => {
-    $('.datepicker').on('focus', () => {
-        $(event.currentTarget).attr('type', 'datetime-local');
-    }).on('blur', () => {
-        if ($(event.currentTarget).val() === '') {
-            $(event.currentTarget).attr('type', 'text');
-        }
-    })
-})

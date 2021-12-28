@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Report;
+use App\Entity\ReportFilter;
 use App\Services\ReportService;
 use App\Type\ReportType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class ReportController
@@ -23,10 +26,11 @@ class ReportController extends AbstractController
      *
      * @param Request $request
      * @param ReportService $reportService
+     * @param TranslatorInterface $translator
      *
      * @return Response
      */
-    public function indexAction(Request $request, ReportService $reportService): Response
+    public function indexAction(Request $request, ReportService $reportService, TranslatorInterface $translator): Response
     {
         $reports = $reportService->getAllReports();
 
@@ -44,9 +48,22 @@ class ReportController extends AbstractController
         if ($request->isMethod(Request::METHOD_POST)) {
             $filterForm->handleRequest($request);
 
-            $reportFilter = $filterForm->getData();
+            if (count($filterForm->getErrors(true)) <= 0) {
 
-            $reports = $reportService->filterReports($reportFilter);
+                /** @var ReportFilter $reportFilter */
+                $reportFilter = $filterForm->getData();
+
+                $dateTo = $reportFilter->getDateTo();
+                $dateFrom = $reportFilter->getDateFrom();
+
+                if ($dateTo->diff($dateFrom)->invert === 0) {
+                    $filterForm->get('dateTo')->addError(new FormError($translator->trans('errors.period', [], 'errors')));
+                } else {
+                    $reports = $reportService->filterReports($reportFilter);
+
+                    var_dump($reports);
+                }
+            }
         }
 
         $parameters = [

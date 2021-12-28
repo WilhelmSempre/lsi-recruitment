@@ -32,7 +32,7 @@ class ReportType extends AbstractType
             ])
             ->add('dateFrom', DateTimeType::class, [
                 'widget' => 'single_text',
-                'html5' => false,
+                'html5' => true,
                 'required' => false,
                 'label' => false,
                 'attr' => [
@@ -42,7 +42,7 @@ class ReportType extends AbstractType
             ->add('dateTo', DateTimeType::class, [
                 'widget' => 'single_text',
                 'required' => false,
-                'html5' => false,
+                'html5' => true,
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'filter.dateTo',
@@ -64,6 +64,7 @@ class ReportType extends AbstractType
                     'data_class' => ReportFilter::class,
                     'locals' => [],
                     'translation_domain' => 'filter',
+                    'csrf_protection' => false,
                 ]
             );
     }

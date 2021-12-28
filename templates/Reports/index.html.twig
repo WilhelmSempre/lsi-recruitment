@@ -12,17 +12,19 @@
                     </div>
 
                     <div class="input-group mb-3 datepicker">
-                        <i></i>
                         {{ form_widget(filterForm.dateFrom, { 'attr' : { 'class': 'form-control datepicker' } }) }}
                     </div>
 
                     <div class="input-group mb-3">
-                        <i></i>
+                        {{ form_errors(filterForm.dateTo) }}
+                    </div>
+
+                    <div class="input-group mb-3">
                         {{ form_widget(filterForm.dateTo, { 'attr' : { 'class': 'form-control datepicker' } }) }}
                     </div>
 
                     {{ form_widget(filterForm.submit, { 'attr' : { 'class': 'btn btn-primary' } }) }}
-                {{ form_end(filterForm) }}
+                {{ form_end(filterForm, {'render_rest': false}) }}
             </aside>
 
             <aside class="col-8">

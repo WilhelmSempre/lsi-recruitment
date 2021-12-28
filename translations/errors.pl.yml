@@ -1,0 +1,2 @@
+errors:
+  period: 'Data "Do" nie może być starsza niż data "Od"'
