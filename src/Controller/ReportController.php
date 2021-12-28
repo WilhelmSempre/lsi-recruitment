@@ -60,8 +60,6 @@ class ReportController extends AbstractController
                     $filterForm->get('dateTo')->addError(new FormError($translator->trans('errors.period', [], 'errors')));
                 } else {
                     $reports = $reportService->filterReports($reportFilter);
-
-                    var_dump($reports);
                 }
             }
         }
