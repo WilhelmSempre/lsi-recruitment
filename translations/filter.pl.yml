@@ -1,0 +1,5 @@
+filter:
+  local: 'Lokal:'
+  dateFrom: 'Od:'
+  dateTo: 'Do:'
+  submit: 'Zatwierdź'

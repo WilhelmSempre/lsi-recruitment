@@ -1,0 +1,6 @@
+table:
+  name: 'Nazwa'
+  date: 'Data'
+  time: 'Godzina'
+  user: 'Użytkownik'
+  local: 'Lokal'

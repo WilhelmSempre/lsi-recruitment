@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LSI - Reports{% endblock %}
+
+{% block body %}
+    <div class="container-fluid container mt-3">
+        <div class="row">
+            <aside class="col-4">
+                {{ form_start(filterForm, { 'attr' : { 'class': 'form', 'novalidate' : 'novalidate', 'autocomplete' : 'off' } }) }}
+                    <div class="input-group mb-3">
+                        {{ form_widget(filterForm.local, { 'attr' : { 'class': 'form-select' } }) }}
+                    </div>
+
+                    <div class="input-group mb-3 datepicker">
+                        <i></i>
+                        {{ form_widget(filterForm.dateFrom, { 'attr' : { 'class': 'form-control datepicker' } }) }}
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <i></i>
+                        {{ form_widget(filterForm.dateTo, { 'attr' : { 'class': 'form-control datepicker' } }) }}
+                    </div>
+
+                    {{ form_widget(filterForm.submit, { 'attr' : { 'class': 'btn btn-primary' } }) }}
+                {{ form_end(filterForm) }}
+            </aside>
+
+            <aside class="col-8">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{ 'table.name'|trans({}, 'table') }}</th>
+                        <th>{{ 'table.date'|trans({}, 'table') }}</th>
+                        <th>{{ 'table.time'|trans({}, 'table') }}</th>
+                        <th>{{ 'table.user'|trans({}, 'table') }}</th>
+                        <th>{{ 'table.local'|trans({}, 'table') }}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for report in reports %}
+                            <tr>
+                                <td>{{ report.name }}</td>
+                                <td>{{ report.createdAt|date('d.m.Y') }}</td>
+                                <td>{{ report.createdAt|date('H:i:s') }}</td>
+                                <td>{{ report.customer }}</td>
+                                <td>{{ report.local }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </aside>
+        </div>
+    </div>
+{% endblock %}
